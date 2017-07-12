@@ -16,9 +16,14 @@ public class Crime {
     private Date mTime;
     private boolean mSolved;
     private boolean mPoliceRequired;
+    private String mSuspect;
 
     public Crime() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id){
+        mId = id;
         mDate = new Date();
         mTime = new Date();
     }
@@ -70,5 +75,13 @@ public class Crime {
 
     public void setTime(Date time) {
         mTime = time;
+    }
+
+    public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 }

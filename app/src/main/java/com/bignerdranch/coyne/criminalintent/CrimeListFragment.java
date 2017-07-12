@@ -90,7 +90,7 @@ public class CrimeListFragment extends Fragment {
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent = CrimePagerActivity
                         .newIntent(getActivity(), crime.getId());
-                updateUI();
+                startActivity(intent);
                 return true;
             case R.id.show_subtitle:
                 mSubtitleVisisble = !mSubtitleVisisble;
@@ -125,6 +125,7 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }else{
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -232,12 +233,11 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public int getItemViewType (int position) {
-            boolean requiresPolice = mCrimes.get(position).isPoliceRequired();
-            if (requiresPolice) {
-                return LIST_ITEM_CRIME_POLICE;
-            } else {
-                return LIST_ITEM_CRIME;
-            }
+            return LIST_ITEM_CRIME;
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 }
